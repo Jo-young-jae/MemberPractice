@@ -13,14 +13,15 @@
 			document.getElementById("sign").onclick = function() {
 				location.href = "sign.jsp";
 			}
+			
+			document.getElementById("board").onclick = function(){
+				location.href ="board.do";
+			}
 		}
 	</script>
 
-	
-		if (${result}) {
-	
-
-
+	<c:choose>
+		<c:when test="${result}">
 	<table border=1>
 
 		<tr>
@@ -32,12 +33,13 @@
 			<th><button id="board">게시판으로 가기</button></th>
 		<tr>
 	</table>
-
+	</c:when>
 	
-		} else {
+	
+		<c:otherwise>
 	
 
-	<form action="login.do" method="post">
+	<form action="login.do">
 		<table border=1>
 			<tr>
 				<th colspan=2>회원 로그인</th>
@@ -47,7 +49,6 @@
 				<th><input type="text" name="id" id="id"
 					placeholder="아이디를 입력하세요"></th>
 			</tr>
-
 
 			<tr>
 				<th>비밀번호:</th>
@@ -61,10 +62,11 @@
 					<button id="sign" type="button">회원가입</button></th>
 			</tr>
 		</table>
+		
 	</form>
 	
-		}
-	
+		</c:otherwise>
+	</c:choose>
 
 </body>
 </html>

@@ -43,16 +43,16 @@ public class MembersDAO {
 	
 	public boolean loginMember(String id, String pw) throws Exception{
 		Connection con = this.getConnection();
-		String sql = "select * from where id=? and pw=?";
+		String sql = "select * from members where id=? and pw=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		pstat.setString(2, pw);
 		ResultSet rs = pstat.executeQuery();
-		
+		boolean result = rs.next();
 		pstat.close();
 		con.close();
 		
-		return rs.next();		
+		return result;		
 	}
 	
 	public int deleteMember(String id, String pw) throws Exception{

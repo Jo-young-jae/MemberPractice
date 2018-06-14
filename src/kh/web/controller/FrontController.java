@@ -1,6 +1,7 @@
 package kh.web.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.web.beans.BoardDAO;
+import kh.web.beans.BoardDTO;
 import kh.web.beans.MembersDAO;
 
 @WebServlet("*.do")
@@ -35,15 +37,20 @@ public class FrontController extends HttpServlet {
 			String phone = request.getParameter("phone");
 			
 			int result = mem_dao.signMember(id, pw, name, email, phone);
-			request.setAttribute("result", result);
+			request.setAttribute("sign", result);
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 		}else if(command.equals("/login.do")) {
 			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			boolean result = mem_dao.loginMember(id, pw);
+			String pw = request.getParameter("pw");			
+			boolean result = mem_dao.loginMember(id, pw);			
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+		}else if(command.equals("/board.do")) {
+			List<BoardDTO> result = board_dao.selectBoard();
+			request.setAttribute("result", result);
+			RequestDispatcher rd = request.getRequestDispatcher("boardList.jsp");
 			rd.forward(request, response);
 		}
 		
