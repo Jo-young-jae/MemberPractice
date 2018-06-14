@@ -44,9 +44,11 @@ public class FrontController extends HttpServlet {
 		}else if(command.equals("/login.do")) {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
-			HttpSession session = request.getSession();
-			session.setAttribute("loginId", id);
-			boolean result = mem_dao.loginMember(id, pw);			
+			HttpSession session = request.getSession();			
+			boolean result = mem_dao.loginMember(id, pw);
+			if(result) {
+				session.setAttribute("loginId", id);
+			}
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
