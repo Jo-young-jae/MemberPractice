@@ -33,11 +33,9 @@
 			<th><button id="board">게시판으로 가기</button></th>
 		<tr>
 	</table>
-	</c:when>
+	</c:when>	
 	
-	
-		<c:otherwise>
-	
+		<c:otherwise>	
 
 	<form action="login.do">
 		<table border=1>
