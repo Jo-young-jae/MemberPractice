@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kh.web.beans.BoardDAO;
 import kh.web.beans.BoardDTO;
@@ -42,12 +43,14 @@ public class FrontController extends HttpServlet {
 			rd.forward(request, response);
 		}else if(command.equals("/login.do")) {
 			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");			
+			String pw = request.getParameter("pw");
+			HttpSession session = request.getSession();
+			session.setAttribute("loginId", id);
 			boolean result = mem_dao.loginMember(id, pw);			
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
-		}else if(command.equals("/board.do")) {
+		}else if(command.equals("/board.do")) {			
 			List<BoardDTO> result = board_dao.selectBoard();
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("boardList.jsp");
