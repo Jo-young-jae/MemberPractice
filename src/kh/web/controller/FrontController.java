@@ -57,6 +57,14 @@ public class FrontController extends HttpServlet {
 			request.setAttribute("result", result);
 			RequestDispatcher rd = request.getRequestDispatcher("boardList.jsp");
 			rd.forward(request, response);
+		}else if(command.equals("/delete.do")) {
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			int result = mem_dao.deleteMember(id, pw);
+			request.setAttribute("result", result);
+			RequestDispatcher rd = request.getRequestDispatcher("memberout.jsp");
+			rd.forward(request, response);
+			
 		}
 		
 		}catch(Exception e) {

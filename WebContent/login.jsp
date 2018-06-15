@@ -10,20 +10,18 @@
 <body>
 	<script>
 		window.onload = function() {
-			document.getElementById("sign").onclick = function() {
-				location.href = "sign.jsp";
-			}
-			
 			document.getElementById("board").onclick = function(){
 				location.href ="board.do";
 			}
+			
+			
+						
 		}
 	</script>
 
 	<c:choose>
 		<c:when test="${result}">
 	<table border=1>
-
 		<tr>
 			<th colspan=3></th> 
 		<tr>
@@ -60,6 +58,11 @@
 					<button id="sign" type="button">회원가입</button></th>
 			</tr>
 		</table>
+		<script>
+			document.getElementById("sign").onclick = function() {
+				location.href = "sign.jsp";
+			}
+		</script>
 		
 	</form>
 	

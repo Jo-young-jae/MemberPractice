@@ -18,6 +18,7 @@
 	<table border=1 width=700 height=700 align=center>
 		<tr>
 			<th colspan=5 height=30>자유게시판</th>
+			
 		</tr>
 		<tr height=30 align=center>
 			<td width=40></td>
@@ -30,7 +31,7 @@
 				<c:forEach var="item" items="${result}">
 					<tr>
 						<td>${item.no}
-						<td><a href="FrontController?no=${item.seq}">${item.title}</a>
+						<td><a href="boardView.do?no=${item.no}">${item.title}</a>
 						<td>${item.writer}
 						<td>${item.write_date}
 					</tr>
