@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -11,32 +11,32 @@
 <form action="sign.do" method="post">
 	<table border=1>
 		<tr>
-			<td colspan=2 align=center>ȸ������</td>
+			<td colspan=2 align=center>회원가입</td>
 		</tr>
 		<tr>
-			<td>���̵�</td>
-			<td><input type=text name="id" id="id" placeholder="�ߺ�Ȯ�ι�ư�� �����ּ���">
-				<button id=duplcheck>�ߺ�Ȯ��</button></td>
+			<td>아이디</td>
+			<td><input type=text name="id" id="id" placeholder="중복확인버튼을 눌러주세요">
+				<button id=duplcheck>중복확인</button></td>
 		</tr>
 		<tr>
-			<td>��й�ȣ</td>
-			<td><input type=password name=pw id="pw" placeholder=�н������Է�></td>
+			<td>비밀번호</td>
+			<td><input type=password name=pw id="pw" placeholder=패스워드입력></td>
 		</tr>
 		<tr>
-			<td>�̸�</td>
+			<td>이름</td>
 			<td><input type=text name=name id="name"></td>
 		</tr>
 		<tr>
-			<td>��ȭ��ȣ</td>
+			<td>전화번호</td>
 			<td>
 			 <input type=text name="phone" id="phone"></td>
 		</tr>
 		<tr>
-			<td>�̸���</td>
+			<td>이메일</td>
 			<td><input type=text name="email" id="email"></td>
 		</tr>
 		<tr>
-			<td colspan=2 align=center><button id="sign">ȸ������</button>
+			<td colspan=2 align=center><button type=submit id="sign">회원가입</button>
 		</tr>
 
 

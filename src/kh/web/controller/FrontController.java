@@ -17,48 +17,50 @@ import kh.web.beans.MembersDAO;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-         
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+
+
+			String requestURI = request.getRequestURI();
+			String contextPath = request.getContextPath();
+
+			String command = requestURI.substring(contextPath.length());
+			MembersDAO mem_dao = new MembersDAO();
+			BoardDAO board_dao = new BoardDAO();
 			
-		
-		String requestURI = request.getRequestURI();
-		String contextPath = request.getContextPath();
-		
-		String command = requestURI.substring(contextPath.length());
-		MembersDAO mem_dao = new MembersDAO();
-		BoardDAO board_dao = new BoardDAO();
-		
-		if(command.equals("/sign.do")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
-			String phone = request.getParameter("phone");
-			
-			int result = mem_dao.signMember(id, pw, name, email, phone);
-			request.setAttribute("sign", result);
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
-		}else if(command.equals("/login.do")) {
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			HttpSession session = request.getSession();			
-			boolean result = mem_dao.loginMember(id, pw);
-			if(result) {
-				session.setAttribute("loginId", id);
+			System.out.println(command);
+
+			if(command.equals("/sign.do")) {
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+
+				int result = mem_dao.signMember(id, pw, name, email, phone);
+				request.setAttribute("sign", result);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+				rd.forward(request, response);
+			}else if(command.equals("/login.do")) {
+				String id = request.getParameter("id");
+				String pw = request.getParameter("pw");
+				HttpSession session = request.getSession();			
+				boolean result = mem_dao.loginMember(id, pw);
+				if(result) {
+					session.setAttribute("loginId", id);
+				}
+				request.setAttribute("result", result);
+				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+				rd.forward(request, response);
+			}else if(command.equals("/board.do")) {			
+				List<BoardDTO> result = board_dao.selectBoard();
+				request.setAttribute("result", result);
+				RequestDispatcher rd = request.getRequestDispatcher("boardList.jsp");
+				rd.forward(request, response);
 			}
-			request.setAttribute("result", result);
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
-		}else if(command.equals("/board.do")) {			
-			List<BoardDTO> result = board_dao.selectBoard();
-			request.setAttribute("result", result);
-			RequestDispatcher rd = request.getRequestDispatcher("boardList.jsp");
-			rd.forward(request, response);
-		}
-		
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
